@@ -1,0 +1,57 @@
+// players are presented with a splash screen showing Start or Join
+
+// on clicking START, player is assigned as Player One 
+    (php IP address set to player one)
+    // player is given a url link to invite an opponent -- AND -- option of just ROOM ID and website link
+        // url contains ROOMID 
+
+// Player One has loading screen -- "Waiting on Player Two"
+    //Player One sends signal to Player Two that they are ready, waits on reply from Player Two 
+
+// Player Two goes to given URL -- OR -- goes to normal site and enters ROOMID -> Join Game
+    (php IP address set to player two)
+    // url to load game -- EITHER -- load game straight away and send ready signal -- OR -- prefill value in ROOMID field, disable 'Start' button, have to click join to play.
+    // Sends signal to Player One that they are ready. 
+        // Waits on/checks for signal from Player One that they are ready.
+
+// both players are ready
+    // splash screen is removed
+        // player one's turn first
+          **// msg in obvious place for Player Two that they are waiting for Player One to take their turn
+        // move is played
+            // move is displayed for player one
+                // game logic checks for win -- OR -- draw
+                    // on win, winning player is shown winning banner, loser, losing banner
+                    // on draw, both players shown draw banner
+            // player one can no longer make moves
+            // player one is waiting on player Two's move
+
+        // player two moves, repeats from** with oposite players
+
+RESET BUTTON
+// at any point either player can reset the game
+    // forced -- OR -- both players agree?
+        // board object is reset to empty
+        // all board discs are removed
+        // set currentPlayer to whoever didn't start last time.
+            ( have to set variable startingPlayer and switch at the end of each game or reset)
+            ( previousPlayer set to opposite of currentPlayer)
+        // other variables may need to be reset also
+        
+QUIT BUTTON
+// disconnects player from game and sends quit message to opponent
+    // takes player back to splash screen
+    // pop up msg for opponent
+        // on press of 'ok' takes them back to splash screen
+
+ON RELOAD
+// would prefer to be able to keep game in play in case of accidental reload
+    // would require board variable to be saved to json file constantly instead of relying on updating one ID on each move
+
+POTENTIAL CHAT OPTION
+// use something like kiwirc for irc based chat. 
+// both players would have to agree to it
+// potential security issue for unsuspecting players? 
+
+POTENTIAL ON GOING TALLY
+// track how many wins each player has over numerous games in one session

@@ -1,11 +1,17 @@
-var currentPlayer;
+
 var playerOne = "player-one";
 var playerTwo = "player-two";
+var winner = "";
 var score = [];
 var column = 0;
 var p1Holder = document.getElementById("player--holder__p1");
 var p2Holder = document.getElementById("player--holder__p2");
-var gameOver = false;
+var directions = [
+    [[-1,-2,-3], [1,2,3]], // check R to L -x & check R to L +x
+    [[-10,-20,-30], [10,20,30]],// check Near to Far -y & // check Near to Far +y
+    [[9,18,27], [-9,-18,-27]], // check Near to Far diagonal -x+y & // check Near to Far diagonal x -y
+    [[11,22,33], [-11,-22,-33]] // check Near to Far diagonal +x y & // check Near to Far diagon +x-y
+    ];
 var board = [
     {id: 11, filled: null, column: 0, row: 1},
     {id: 12, filled: null, column: 1, row: 1},
@@ -51,35 +57,20 @@ var board = [
     {id: 67, filled: null, column: 6, row: 6}
 ]; 
 
-var directions = [
-    [[-1,-2,-3], [1,2,3]], // check R to L -x & check R to L +x
-    [[-10,-20,-30], [10,20,30]],// check Near to Far -y & // check Near to Far +y
-    [[9,18,27], [-9,-18,-27]], // check Near to Far diagonal -x+y & // check Near to Far diagonal x -y
-    [[11,22,33], [-11,-22,-33]] // check Near to Far diagonal +x y & // check Near to Far diagon +x-y
-];
-
-var resetBtn = document.getElementById("reset-btn");
-
-/*function clickArrow(columnNumber) {
-    if (!gameOver) {
-        dropColumn(columnNumber);
-    } else {
-        console.log("Game is over, press reset to start again")
-    }
-}*/
 
 function dropColumn(columnNumber) {
     var columnData, id;
     columnData = board.filter(x => x.column == columnNumber);
     
     for (i = 0; i < columnData.length; i++){
-        if (columnData[i].filled == null) {
+        if (columnData[i].filled === null) {
             columnData[i].filled = currentPlayer;
             id = columnData[i].id;
             row = 7 - columnData[i].row;
             dropDisc(currentPlayer, id, row);
             directions.forEach(direction => checkForWin(direction, id, currentPlayer));
-            return nextPlayer(); // stops loop from running once one disc has been assigned a cell
+            checkForDraw();
+            return nextPlayer(id, row); // stops loop from running once one disc has been assigned a cell
         }
     } console.log("Column is full"); //please try again function
 }
@@ -101,8 +92,10 @@ function checkForWin(direction, id, currentPlayer) {
     try {
         for (a = 0; a < 2; a++) { // iterate through first level arrays in directions, directions are grouped either side of the id
             for (i = 0; i < 3; i++) { // iterate through second levels of arrays
-                if (board.find(x => x.id === id + direction[a][i]).filled == currentPlayer) {
+                if (board.find(x => x.id === id + direction[a][i]).filled === currentPlayer) {
+                    
                     score.push(1);
+                    console.log(score + a + i);
                     checkScore(score);
                 } else {
                     i = 3;
@@ -118,6 +111,7 @@ function checkScore(score) {
     if (score.length >= 3) {
         gameOver = true;
         document.getElementById("win").className += " visible";
+        winner = player;
     } 
 }
 
@@ -125,6 +119,7 @@ function checkFinalScore(score) {
     if (score.length >= 3) {
         gameOver = true;
         document.getElementById("win").className += " visible";
+        winner = player;
         return;
     } clearScores() 
 }
@@ -133,26 +128,38 @@ function clearScores() {
     score = [];
 }
 
-function nextPlayer() {
+function checkForDraw() {
+    cells = board.filter(x => x.filled === null);
+    if (cells.length === 0) {
+        console.log("draw");
+    }  
+}
+
+function nextPlayer(id, row) {
+var previousPlayer;
 
     if (currentPlayer == playerOne) {
         currentPlayer = playerTwo;
-        p1Holder.classList.remove("active");
-        p2Holder.classList.add("active");
-        return currentPlayer;
+        previousPlayer = playerOne;
+        postGame(id, row, currentPlayer, previousPlayer);
     } else if (currentPlayer == playerTwo) {
         currentPlayer = playerOne;
-        p2Holder.classList.remove("active");
-        p1Holder.classList.add("active");
-        return currentPlayer;
+        previousPlayer = playerTwo;
+        
+        //return currentPlayer;
+        postGame(id, row, currentPlayer, previousPlayer);
     } else {
         console.log("Oh my gosh, wtf");
         return;
     }
+    p2Holder.classList.toggle("active");
+    p1Holder.classList.toggle("active");
 }
 
-function resetBoard() {
+function setBoard() {
     gameOver = false;
+    winner = "";
+    id = undefined;
     currentPlayer = playerOne;
     board = [
         {id: 11, filled: null, column: 0, row: 1},
@@ -212,6 +219,4 @@ function resetBoard() {
             banners[i].classList.remove("visible");
         }
     }
-    
-    
 }

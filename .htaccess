@@ -4,6 +4,6 @@ ErrorDocument 403 /errors/forbid.html
 ErrorDocument 404 /errors/not-found.html
 ErrorDocument 500 /errors/server-err.html
 
-DirectoryIndex game.html
+DirectoryIndex game.php
 
 Options -Indexes

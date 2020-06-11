@@ -1,4 +1,8 @@
 <!DOCTYPE html> 
+<?php
+// Start session
+session_start();
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,19 +12,27 @@
     <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans+Condensed:wght@300;700&display=swap" rel="stylesheet">
 </head>
-<body onload="resetBoard()">
-   
+<body onload="setBoard()">
+   <p id="errors"></p>
   <div class="page--container">
-    <h1>Connect Four</h1>
+    <h1>Welcome <span id="player"><?php
+   $_SESSION["player"] = "player-one";
+   $player = $_SESSION["player"];
+   echo $player;
+   ?></span></h1>
       <div class="game">
 
         <div class="players">
-          <div id="player--holder__p1">
+          <div id="player--holder__p1" class="active">
             <div class="disc player-one">
             </div>
             <h3>Player One</h3>
           </div>
-          <button class="btn" id="reset-btn" onclick="resetBoard()">Reset</button>
+          <div>  
+            
+            <button class="btn" id="reset-btn">Reset</button>
+            <button class="btn" id="player-check">Check Player</button>
+        </div>
           <div id="player--holder__p2">
             <div class="disc player-two"></div>
             <h3>Player Two</h3>
@@ -28,6 +40,15 @@
       </div>
       
       <div class="board">
+        <div id="start-menu">
+          <p>If you have a room ID enter below and click "Join Game". If not create a room ID (numbers only) and click Start New Game. Give this room ID to your opponent so they can join your game</p>
+          <button class="btn" id="start" onclick="startNewGame()">Start New Game</button>
+          <input type="number" id="roomID">
+          <input type="text" id="playerName">
+          <a href="joinGame.php"><button class="btn" id="join">Join Game</button></a>
+          
+          
+        </div>
         <!--<svg width="59" height="112" viewBox="0 0 59 112" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path d="M49.3804 0H8.97826V62H0L28.538 112L59 62H49.3804V0Z" fill="#D6C424"/>
         </svg>-->
@@ -54,31 +75,31 @@
           </div>
         </div>
         <div class="arrows">
-          <div class="arrow--holder" column="0" onclick="clickArrow(0)"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div class="arrow--holder" column="0"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.0435 0H1.82609V9.96429H0L5.80435 18L12 9.96429H10.0435V0Z"/>
             </svg>
             </div>
-          <div class="arrow--holder" column="1" onclick="clickArrow(1)"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div class="arrow--holder" column="1"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.0435 0H1.82609V9.96429H0L5.80435 18L12 9.96429H10.0435V0Z"/>
             </svg>
             </div>
-          <div class="arrow--holder" column="2" onclick="clickArrow(2)"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div class="arrow--holder" column="2"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.0435 0H1.82609V9.96429H0L5.80435 18L12 9.96429H10.0435V0Z"/>
             </svg>
             </div>
-          <div class="arrow--holder" column="3" onclick="clickArrow(3)"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div class="arrow--holder" column="3"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.0435 0H1.82609V9.96429H0L5.80435 18L12 9.96429H10.0435V0Z"/>
             </svg>
             </div>
-          <div class="arrow--holder" column="4" onclick="clickArrow(4)"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div class="arrow--holder" column="4"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.0435 0H1.82609V9.96429H0L5.80435 18L12 9.96429H10.0435V0Z"/>
             </svg>
             </div>
-          <div class="arrow--holder" column="5" onclick="clickArrow(5)"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div class="arrow--holder" column="5"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.0435 0H1.82609V9.96429H0L5.80435 18L12 9.96429H10.0435V0Z"/>
             </svg>
             </div>
-          <div class="arrow--holder" column="6" onclick="clickArrow(6)"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div class="arrow--holder" column="6"><svg class="arrow" viewBox="0 0 12 18" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10.0435 0H1.82609V9.96429H0L5.80435 18L12 9.96429H10.0435V0Z"/>
             </svg>
             </div>
@@ -144,8 +165,10 @@
     </div>
   </div>
 
-
-    <script type="text/javascript" src="gamejQuery.js"></script>
-    <script type="text/javascript" src="game.js"></script>
+  <script type="text/javascript" src="game.js"></script>
+  <script type="text/javascript" src="gamejQuery.js"></script>
+    
 </body>
 </html>
+
+

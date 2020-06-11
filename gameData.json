@@ -1,0 +1,9 @@
+{
+    "gameOver": false,
+    "currentPlayer": "",
+    "previousPlayer": "",
+    "id": "",
+    "row": "",
+    "winner": "",
+    "reset": false
+}

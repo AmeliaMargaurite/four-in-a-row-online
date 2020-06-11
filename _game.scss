@@ -50,7 +50,7 @@
     height: 35px;
     width: 35px;
     border-radius: 50%;
-    background: gray;
+    background: #B11515;
     
     &::after {
         content: "";
@@ -58,20 +58,12 @@
         height: 80%;
         width: 80%;
         border-radius: 50%;
-        background: blue;
+        background: radial-gradient(50% 50% at 50% 50%, #D02727 81.77%, #980606 100%);
         margin: 10%;        
     }
   }
-
-  .player-one {
-    background: #B11515;
-    
-    &::after {
-        background: radial-gradient(50% 50% at 50% 50%, #D02727 81.77%, #980606 100%);
-      }
-    }
   
-  .player-two {
+  .disc.player-two, .discs.player-two {
     background: #1815B1;
     
     &::after {
