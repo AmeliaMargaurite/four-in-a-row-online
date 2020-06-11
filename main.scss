@@ -1,0 +1,17 @@
+@import "config";
+@import "game";
+@import "banners";
+@import "responsive"; 
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+      display: grid;
+      justify-items: center;
+      font-family: $font;
+  }
+  

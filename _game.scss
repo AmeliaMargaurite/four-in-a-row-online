@@ -1,0 +1,151 @@
+
+  .page--container {
+    width: 280px;
+    display: grid;
+    grid-template-columns: 1fr;
+    //margin: 1rem 1rem;
+  
+    h1 {
+        text-align: center;
+        text-transform: uppercase;
+    }
+  }
+  
+  .board {
+      position: relative;
+    width: 280px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    flex-flow: wrap;
+  }
+  
+  #game--board {
+      width: 290px;
+      height: auto;
+      position: absolute;
+      bottom: -16px;
+      left:-8px;
+      z-index: 20;
+
+      path {
+          fill: #348F50;  /* fallback for old browsers */
+          background: -webkit-linear-gradient(to right, #56B4D3, #348F50);  /* Chrome 10-25, Safari 5.1-6 */
+          background: linear-gradient(to right, #56B4D3, #348F50); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+          ;
+      }
+  }
+  .cell {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+    background: transparent;
+    margin: -1px;
+  }
+  
+  .disc, .discs {
+    position: relative;
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    background: gray;
+    
+    &::after {
+        content: "";
+        position: absolute;
+        height: 80%;
+        width: 80%;
+        border-radius: 50%;
+        background: blue;
+        margin: 10%;        
+    }
+  }
+
+  .player-one {
+    background: #B11515;
+    
+    &::after {
+        background: radial-gradient(50% 50% at 50% 50%, #D02727 81.77%, #980606 100%);
+      }
+    }
+  
+  .player-two {
+    background: #1815B1;
+    
+    &::after {
+        background: radial-gradient(50% 50% at 50% 50%, #322EE3 81.77%, #09068E 100%);
+      }
+    }
+
+.btn {
+    width: 100px;
+    height: 50px;
+    //margin: 0.25rem 0;
+    background-image: #FC5C7D;  /* fallback for old browsers */
+    background-image: -webkit-linear-gradient(to right, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+    background-image: linear-gradient(to right, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border: none;
+    color: white;
+    text-transform: uppercase;
+    font-weight: 900;
+    transition: all 1s ease-in-out;
+
+    &:hover {
+      background-image: #FC5C7D;  /* fallback for old browsers */
+      background-image: -webkit-linear-gradient(to top, #6A82FB, #FC5C7D);  /* Chrome 10-25, Safari 5.1-6 */
+      background-image: linear-gradient(to top, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+      transition: all 1s ease-in-out;
+    }
+
+}
+
+.arrows {
+    display: flex;
+    height: 50px;
+}
+
+.arrow {
+    height: 30px;
+    width: 40px;
+    padding-top: 5px;
+    transition: $ease;
+    &:hover {
+        path {
+            fill: rgb(204, 204, 55);
+        }
+        transition: $ease;
+    }
+    &--holder {
+        height: 50px;
+        width: 40px;
+    }
+}
+
+#player--holder {
+    &__p1, &__p2 {
+        padding: 1rem;
+        &.active {
+            border: 2px yellow solid;
+        }
+    }
+}
+
+.players {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.discs.player-one, .discs.player-two {
+  //opacity: 0;
+  //transform: translateY(50px);
+  transition: transform 3s;
+
+  &.dropped {
+    //opacity: 1;
+    //transform: translateY(0px);
+    transition: transform 3s;
+  }
+}

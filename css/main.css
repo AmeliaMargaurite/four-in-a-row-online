@@ -1,0 +1,310 @@
+.page--container {
+  width: 280px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr;
+      grid-template-columns: 1fr;
+}
+
+.page--container h1 {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.board {
+  position: relative;
+  width: 280px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: auto;
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+}
+
+#game--board {
+  width: 290px;
+  height: auto;
+  position: absolute;
+  bottom: -16px;
+  left: -8px;
+  z-index: 20;
+}
+
+#game--board path {
+  fill: #348F50;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#56B4D3), to(#348F50));
+  background: linear-gradient(to right, #56B4D3, #348F50);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.cell {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 40px;
+  width: 40px;
+  background: transparent;
+  margin: -1px;
+}
+
+.disc, .discs {
+  position: relative;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background: gray;
+}
+
+.disc::after, .discs::after {
+  content: "";
+  position: absolute;
+  height: 80%;
+  width: 80%;
+  border-radius: 50%;
+  background: blue;
+  margin: 10%;
+}
+
+.player-one {
+  background: #B11515;
+}
+
+.player-one::after {
+  background: radial-gradient(50% 50% at 50% 50%, #D02727 81.77%, #980606 100%);
+}
+
+.player-two {
+  background: #1815B1;
+}
+
+.player-two::after {
+  background: radial-gradient(50% 50% at 50% 50%, #322EE3 81.77%, #09068E 100%);
+}
+
+.btn {
+  width: 100px;
+  height: 50px;
+  background-image: #FC5C7D;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background-image: -webkit-gradient(linear, left top, right top, from(#6A82FB), to(#FC5C7D));
+  background-image: linear-gradient(to right, #6A82FB, #FC5C7D);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  border: none;
+  color: white;
+  text-transform: uppercase;
+  font-weight: 900;
+  -webkit-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+}
+
+.btn:hover {
+  background-image: #FC5C7D;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background-image: -webkit-gradient(linear, left bottom, left top, from(#6A82FB), to(#FC5C7D));
+  background-image: linear-gradient(to top, #6A82FB, #FC5C7D);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  -webkit-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+}
+
+.arrows {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 50px;
+}
+
+.arrow {
+  height: 30px;
+  width: 40px;
+  padding-top: 5px;
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+.arrow:hover {
+  -webkit-transition: all 0.25s ease-in-out;
+  transition: all 0.25s ease-in-out;
+}
+
+.arrow:hover path {
+  fill: #cccc37;
+}
+
+.arrow--holder {
+  height: 50px;
+  width: 40px;
+}
+
+#player--holder__p1, #player--holder__p2 {
+  padding: 1rem;
+}
+
+#player--holder__p1.active, #player--holder__p2.active {
+  border: 2px yellow solid;
+}
+
+.players {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.discs.player-one, .discs.player-two {
+  -webkit-transition: -webkit-transform 3s;
+  transition: -webkit-transform 3s;
+  transition: transform 3s;
+  transition: transform 3s, -webkit-transform 3s;
+}
+
+.discs.player-one.dropped, .discs.player-two.dropped {
+  -webkit-transition: -webkit-transform 3s;
+  transition: -webkit-transform 3s;
+  transition: transform 3s;
+  transition: transform 3s, -webkit-transform 3s;
+}
+
+.banner {
+  position: absolute;
+  z-index: 40;
+  top: 100px;
+  left: -5%;
+  width: 110%;
+  height: 100px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  visibility: hidden;
+  color: white;
+  text-shadow: 2px 2px 5px black;
+}
+
+.banner.visible {
+  visibility: visible;
+}
+
+.banner h3 {
+  text-align: center;
+  font-size: 1rem;
+  display: block;
+  text-transform: uppercase;
+}
+
+.win {
+  background: #FDFC47;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#24FE41), to(#FDFC47));
+  background: linear-gradient(to right, #24FE41, #FDFC47);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.lose {
+  background: #403B4A;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#E7E9BB), to(#403B4A));
+  background: linear-gradient(to right, #E7E9BB, #403B4A);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.player-one--welcome {
+  background: #FF416C;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#FF4B2B), to(#FF416C));
+  background: linear-gradient(to right, #FF4B2B, #FF416C);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.player-two--welcome {
+  background: #00B4DB;
+  /* fallback for old browsers */
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-gradient(linear, left top, right top, from(#0083B0), to(#00B4DB));
+  background: linear-gradient(to right, #0083B0, #00B4DB);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+@media screen and (min-width: 768px) {
+  .page--container {
+    width: 700px;
+  }
+  .board {
+    width: 756px;
+  }
+  #game--board {
+    width: auto;
+    bottom: -50px;
+    left: -6px;
+  }
+  .cell {
+    width: 100px;
+    height: 100px;
+  }
+  .disc, .discs {
+    height: 90px;
+    width: 90px;
+  }
+  .arrows {
+    height: 120px;
+  }
+  .arrow {
+    height: inherit;
+    width: inherit;
+  }
+  .arrow--holder {
+    width: 100px;
+    height: 70px;
+  }
+  .banner {
+    top: 300px;
+  }
+  .banner h3 {
+    font-size: 2rem;
+  }
+}
+
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: -ms-grid;
+  display: grid;
+  justify-items: center;
+  font-family: "Open Sans Condensed", sans-serif;
+}
+/*# sourceMappingURL=main.css.map */

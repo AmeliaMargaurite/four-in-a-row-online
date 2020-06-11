@@ -1,0 +1,46 @@
+@include media-md { //768px
+    .page--container {
+        width: 700px;
+    }
+
+    .board {
+        width: 756px;
+    }
+
+    #game--board {
+        width: auto;
+        bottom: -50px;
+        left: -6px;
+    }
+
+    .cell {
+        width: 100px;
+        height: 100px;
+        //outline: 5px solid green;
+    }
+
+    .disc, .discs {
+        height: 90px;
+        width: 90px;
+    }
+
+    .arrows {
+        height: 120px;
+    }
+    .arrow {
+        height: inherit;
+        width: inherit;
+
+        &--holder {
+        width: 100px;
+        height: 70px;
+        }
+    }
+
+    .banner {
+        top: 300px;
+        h3 {
+            font-size: 2rem;
+        }
+    }
+}

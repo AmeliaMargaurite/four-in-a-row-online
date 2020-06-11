@@ -1,0 +1,9 @@
+ErrorDocument 400 /errors/bad-request.html
+ErrorDocument 401 /errors/auth-reqd.html
+ErrorDocument 403 /errors/forbid.html
+ErrorDocument 404 /errors/not-found.html
+ErrorDocument 500 /errors/server-err.html
+
+DirectoryIndex game.html
+
+Options -Indexes
