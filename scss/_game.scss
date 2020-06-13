@@ -103,6 +103,9 @@
     width: 40px;
     padding-top: 5px;
     transition: $ease;
+    path {
+      fill: rgb(103, 224, 103);
+    }
     &:hover {
         path {
             fill: rgb(204, 204, 55);

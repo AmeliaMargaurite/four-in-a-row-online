@@ -15,11 +15,7 @@ session_start();
 <body onload="setBoard()">
    <p id="errors"></p>
   <div class="page--container">
-    <h1>Welcome <span id="player"><?php
-   $_SESSION["player"] = "player-one";
-   $player = $_SESSION["player"];
-   echo $player;
-   ?></span></h1>
+    <h1>Welcome <span id="player"><?php echo $player; ?></span></h1>
       <div class="game">
 
         <div class="players">
@@ -41,11 +37,10 @@ session_start();
       
       <div class="board">
         <div id="start-menu">
-          <p>If you have a room ID enter below and click "Join Game". If not create a room ID (numbers only) and click Start New Game. Give this room ID to your opponent so they can join your game</p>
-          <button class="btn" id="start" onclick="startNewGame()">Start New Game</button>
-          <input type="number" id="roomID">
-          <input type="text" id="playerName">
-          <a href="joinGame.php"><button class="btn" id="join">Join Game</button></a>
+          <p>If you have a room ID enter below and click "Join Game". If not click Start New Game.</p>
+          <button class="btn" id="start">Start New Game</button>
+          <input type="number" id="roomID" placeholder="Enter Room ID">
+          <button class="btn" id="join">Join Game</button>
           
           
         </div>
@@ -60,18 +55,12 @@ session_start();
           </div>
           
           <div class="banner lose" id="lose">
-            <h3>:(</h3>
+            <h3>You lost,</h3>
             <h3>better luck next time</h3>
           </div>
           
-          <div class="banner player-one--welcome" id="p1-welcome">
-            <h3>Welcome,</h3>
-            <h3>Player One</h3>
-          </div>
-          
-          <div class="banner player-two--welcome" id="p2-welcome">
-            <h3>Welcome,</h3>
-            <h3>Player Two</h3>
+          <div class="banner draw" id="draw">
+            <h3>Draw!</h3>
           </div>
         </div>
         <div class="arrows">
@@ -165,8 +154,9 @@ session_start();
     </div>
   </div>
 
-  <script type="text/javascript" src="game.js"></script>
-  <script type="text/javascript" src="gamejQuery.js"></script>
+  <script type="text/javascript" src="js/gameFileCommunications.js"></script>
+  <script type="text/javascript" src="js/gameLogic.js"></script>
+  <script type="text/javascript" src="js/roomFunctions.js"></script>
     
 </body>
 </html>

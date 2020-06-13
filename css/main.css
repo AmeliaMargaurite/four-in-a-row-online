@@ -128,6 +128,10 @@
   transition: all 0.25s ease-in-out;
 }
 
+.arrow path {
+  fill: #67e067;
+}
+
 .arrow:hover {
   -webkit-transition: all 0.25s ease-in-out;
   transition: all 0.25s ease-in-out;
@@ -230,7 +234,7 @@
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.player-one--welcome {
+.draw {
   background: #FF416C;
   /* fallback for old browsers */
   /* Chrome 10-25, Safari 5.1-6 */
@@ -239,21 +243,31 @@
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-.player-two--welcome {
-  background: #00B4DB;
-  /* fallback for old browsers */
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-gradient(linear, left top, right top, from(#0083B0), to(#00B4DB));
-  background: linear-gradient(to right, #0083B0, #00B4DB);
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-}
-
 #start-menu {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  top: 25%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50%;
+  height: 50%;
   background: pink;
+  border-radius: 5%;
   z-index: 50;
+}
+
+#start-menu p {
+  padding: 1rem;
 }
 
 @media screen and (min-width: 768px) {
