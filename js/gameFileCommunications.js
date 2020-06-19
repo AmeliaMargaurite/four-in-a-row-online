@@ -2,10 +2,11 @@
  *     Variables     *
  *********************/
 
-var roomJSON, roomID, reset, previousPlayer;
-var gameSave = "gameSaving.php";
-var gameFile = "php/" + roomID + "Data.json";
-var boardFile = "php/" + roomID + "Board.json";
+var roomJSON, previousPlayer, gameOver, winner;
+var gameSave = "php/gameSaving.php";
+var gameFile = gameFileAddr + roomID + "-Data.json";
+var boardFile = gameFileAddr + roomID + "-Board.json";
+var winner = null;
 
 /*********************
  *     Functions     *
@@ -14,11 +15,10 @@ var boardFile = "php/" + roomID + "Board.json";
 function postGame(id, row, currentPlayer, previousPlayer) {
     //roomID = $("#roomID").val();
     //roomJSON = roomID + ".json";
-    console.log(roomID);
+    console.log("current ID and Row are " + id + " " + row);
     $.post(gameSave,
         {
-            //"roomID": roomID,
-            //"newMove": true,
+            "roomID": roomID,
             "currentPlayer": currentPlayer,
             "previousPlayer": previousPlayer,
             "gameOver": gameOver,
@@ -26,23 +26,16 @@ function postGame(id, row, currentPlayer, previousPlayer) {
             "row": row,
             "winner": winner,
             "reset": reset,
-            "newMove": "yes"
-        },
-        function(response, status){
-        },
-        "json"
-    );
-
-    $.post(gameSave, 
-        {
+            "newMove": "yes",
             "board": board
         },
         function(response, status){
         },
         "json"
     );
+    console.log(winner);
 
     if (gameOver === false || gameOver === "false") {
-    return;
+    return gameOver;
     }
 }

@@ -1,3 +1,8 @@
+:root {
+}
+
+$yellow: #d6d424;
+
 
   .page--container {
     width: 280px;
@@ -63,6 +68,15 @@
     }
   }
   
+  .discs {
+    position: absolute;
+    
+    &::after {
+      left: 2.5%;
+    }
+
+  }
+
   .disc.player-two, .discs.player-two {
     background: #1815B1;
     
@@ -83,6 +97,7 @@
     text-transform: uppercase;
     font-weight: 900;
     transition: all 1s ease-in-out;
+    box-shadow: 3px 3px 10px -5px black;
 
     &:hover {
       background-image: #FC5C7D;  /* fallback for old browsers */
@@ -90,7 +105,9 @@
       background-image: linear-gradient(to top, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
       transition: all 1s ease-in-out;
     }
-
+    &--holder {
+      display: inline-flex;
+    }
 }
 
 .arrows {
@@ -121,8 +138,34 @@
 #player--holder {
     &__p1, &__p2 {
         padding: 1rem;
+        position: relative;
+        display: grid;
+        place-items: center;
         &.active {
-            border: 2px yellow solid;
+            //border: 5px rgb(41, 41, 29) solid;
+            
+            .disc {
+              animation: spin 3s linear infinite;
+
+              &::before {
+                content: "";
+                margin: -20px;
+                position: absolute;
+                height: 15px;
+                width: 15px;
+                border-radius: 50%;
+                background: $yellow;
+                box-shadow:
+                55px 10px 0px -3px #e6c719, 
+                40px 57px 0px -1px #e9e628, 
+                -9px 12px 0px -4px #c4a82a, 
+                32px -9px 0px -4px #d6a624, 
+                5px 44px 0px -3px #d6d424, 
+                59px 42px 0px -4px #D6D416
+              }
+            }
+
+            
         }
     }
 }
@@ -131,16 +174,45 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    h3 {
+      text-align: center;
+    }
+
+    
 }
 
 .discs.player-one, .discs.player-two {
   //opacity: 0;
   //transform: translateY(50px);
-  transition: transform 3s;
 
   &.dropped {
     //opacity: 1;
     //transform: translateY(0px);
-    transition: transform 3s;
+    //top: -5px;
+    
+    animation: dropping var(--s) ease-in;
+    //animation: dropping 0.46s ease-in;
+    
+    //animation: glow 2s ease-in-out;
+    //z-index: 300;10,000
   }
+}
+
+@keyframes spin {
+  from {transform: rotate(0deg)}
+  to {transform: rotate(360deg)}
+}
+
+@keyframes glow {
+  0% {box-shadow: none}
+  50% {box-shadow: 0 0 10px 10px yellow}
+  100% {box-shadow: none}
+}
+
+
+
+@keyframes dropping {
+  0% {transform: translateY(var(--t))}
+  100% {transform: translateY(0)}
 }

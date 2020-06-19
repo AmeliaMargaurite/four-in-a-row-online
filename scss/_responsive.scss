@@ -43,4 +43,48 @@
             font-size: 2rem;
         }
     }
+
+    #start-menu {
+        padding: 1rem;
+        p {
+            font-size: 2rem;
+        }
+
+        .btn {
+            width: 300px;
+            height: 100px;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        input {
+            width: 300px;
+            height: 70px;
+            font-size: 2rem;
+            box-shadow: inset 0px 0px 15px -5px black;
+
+            &::placeholder {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    #player--holder {
+        &__p1, &__p2 {
+            &.active {
+                .disc {
+                    &::before {
+                        box-shadow:
+                120px 120px 0px 0px #e6c719, 
+                133px 48px 0px 0px #e9e628, 
+                -9px 71px 0px -4px #c4a82a, 
+                42px -15px 0px 9px #d6a624, 
+                38px 107px 0px -3px #d6d424,
+                107px 97px 0px -3px #d6d424;
+                    }
+                }
+            }
+        }
+    }
+
 }

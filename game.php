@@ -15,7 +15,7 @@ session_start();
 <body onload="setBoard()">
    <p id="errors"></p>
   <div class="page--container">
-    <h1>Welcome <span id="player"><?php echo $player; ?></span></h1>
+    <h1>Welcome <span id="player"><?php if (isset($player)) {echo $player;} ?></span></h1>
       <div class="game">
 
         <div class="players">
@@ -24,10 +24,12 @@ session_start();
             </div>
             <h3>Player One</h3>
           </div>
-          <div>  
+
+          <div class="btn--holder">  
             
-            <button class="btn" id="reset-btn">Reset</button>
+           <!-- <button class="btn" id="reset-btn" onclick="setBoard('reset')">Reset</button>
             <button class="btn" id="player-check">Check Player</button>
+              -->
         </div>
           <div id="player--holder__p2">
             <div class="disc player-two"></div>
@@ -37,11 +39,11 @@ session_start();
       
       <div class="board">
         <div id="start-menu">
-          <p>If you have a room ID enter below and click "Join Game". If not click Start New Game.</p>
-          <button class="btn" id="start">Start New Game</button>
-          <input type="number" id="roomID" placeholder="Enter Room ID">
+          <p>Press START to start a new game</p>
+          <button class="btn" id="start">Start</button>
+          <p>Joining a game? Enter the RoomID and press JOIN</p>
           <button class="btn" id="join">Join Game</button>
-          
+          <input type="number" id="roomID" placeholder="Enter Room ID">
           
         </div>
         <!--<svg width="59" height="112" viewBox="0 0 59 112" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -154,10 +156,9 @@ session_start();
     </div>
   </div>
 
+  <script type="text/javascript" src="js/roomFunctions.js"></script>
   <script type="text/javascript" src="js/gameFileCommunications.js"></script>
   <script type="text/javascript" src="js/gameLogic.js"></script>
-  <script type="text/javascript" src="js/roomFunctions.js"></script>
-    
 </body>
 </html>
 

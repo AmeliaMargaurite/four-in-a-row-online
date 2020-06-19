@@ -37,7 +37,7 @@ function createPlayerFile() {
     getUserIPAddress();
     $playerIP = $ip;
     $player = $_POST['player'];
-    $playerFile = $roomID.$player.".json";
+    $playerFile = $roomID."-".$player.".json";
     $handle = fopen($playerFile, "w") or die ("failed to create new player info file for Player One");
     $data = array(
         "roomID" => $roomID,
@@ -64,7 +64,7 @@ function getUserIPAddress() {
 
 // creates JSON files for game using template JSON files
 function createJSON($roomID, $type, $file) {
-    $boardFile = $roomID.$type.".json";
+    $boardFile = $roomID."-".$type.".json";
     $handle = fopen($boardFile, "w");
     $copyFile = copy($file, $handle);
     fclose($handle);
