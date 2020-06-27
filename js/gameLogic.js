@@ -65,9 +65,12 @@ var board = [
 $(".arrow--holder").on("click", function() {
     if((!gameOver || gameOver === "false") && playersTurn) {
         var column = $(this).attr("column");
-        playersTurn = false;
         play(column);
-        wait();
+        if (player === currentPlayer) {
+            return;
+        } else {
+            wait();
+        }
     }
 })
 
@@ -91,11 +94,14 @@ function wait() {
             reset = response.reset; 
 
             if (currentPlayer === player) {
+                
                 console.log(currentPlayer +" has been set as currentPlayer");
                 clearInterval(timer);
                 console.log("timer has been cleared");
                 loadMove(roomID);
                 console.log("latest move has been loaded");
+                //p2Holder.classList.toggle("active");
+                //p1Holder.classList.toggle("active");
             } else {
                 playersTurn = false;
                 console.log("Not your turn, please wait");
@@ -189,6 +195,7 @@ function checkForWinner() {
 
 function changePlayers(id, row) {
     var previousPlayer;
+
     p2Holder.classList.toggle("active");
     p1Holder.classList.toggle("active");
 
@@ -219,8 +226,10 @@ function dropColumn(columnNumber) {
             directions.forEach(direction => checkForWin(direction, id, currentPlayer));
             checkForDraw();
             return changePlayers(id, row); // stops loop from running once one disc has been assigned a cell
-        }
-    } console.log("Column is full"); //please try again function
+        } 
+    }
+    console.log("Column is full"); //please try again function
+    return
 }
 
 function drawDisc(player, id, row) {
@@ -234,9 +243,9 @@ function drawDisc(player, id, row) {
         "--t": height,
         "--s": seconds}
         );
-    $(droppedDisc).append(playerDisc);
-    
-
+    setTimeout(() => {
+        $(droppedDisc).append(playerDisc);
+    }, 50);
     setTimeout(() => {
         $(".dropped").toggleClass("dropped");
     }, 3000);

@@ -34,7 +34,7 @@ function postGame(id, row, currentPlayer, previousPlayer) {
         "json"
     );
     console.log(winner);
-
+    playersTurn = false;
     if (gameOver === false || gameOver === "false") {
     return gameOver;
     }

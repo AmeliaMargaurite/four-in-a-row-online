@@ -32,7 +32,6 @@ $("#start").on("click", function() {
     // produce URL with roomID inside with one click copy -- AND -- alternative, separate URL and roomID
     $("#start-menu").empty();
     $("#start-menu").append(instruction, invite, goBtn);
-    playersTurn = true;
     //checkForReset();
 })
 
@@ -123,6 +122,7 @@ function waitingForPlayerTwoJoin() {
         $.get(roomFile, function(data, status) {
             if (status === "success") {
                 clearInterval(timer);
+                playersTurn = true;
                 return;
             }
         });
