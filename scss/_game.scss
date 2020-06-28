@@ -184,7 +184,7 @@ $yellow: #d6d424;
     //transform: translateY(0px);
     //top: -5px;
     
-    animation: dropping var(--s) ease-in;
+    animation: dropping var(--s) ease-in, glow 2s ease-in-out;
     //animation: dropping 0.46s ease-in;
     
     //animation: glow 2s ease-in-out;

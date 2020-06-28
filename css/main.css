@@ -201,8 +201,8 @@
 }
 
 .discs.player-one.dropped, .discs.player-two.dropped {
-  -webkit-animation: dropping var(--s) ease-in;
-          animation: dropping var(--s) ease-in;
+  -webkit-animation: dropping var(--s) ease-in, glow 2s ease-in-out;
+          animation: dropping var(--s) ease-in, glow 2s ease-in-out;
 }
 
 @-webkit-keyframes spin {

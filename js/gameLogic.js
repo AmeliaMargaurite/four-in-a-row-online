@@ -98,10 +98,11 @@ function wait() {
                 console.log(currentPlayer +" has been set as currentPlayer");
                 clearInterval(timer);
                 console.log("timer has been cleared");
-                loadMove(roomID);
+                getGameBoardFiles(roomID);
+                //loadMove(roomID);
                 console.log("latest move has been loaded");
-                //p2Holder.classList.toggle("active");
-                //p1Holder.classList.toggle("active");
+                p2Holder.classList.toggle("active");
+                p1Holder.classList.toggle("active");
             } else {
                 playersTurn = false;
                 console.log("Not your turn, please wait");
@@ -120,31 +121,53 @@ function wait() {
     }
 }
 
-function loadMove(roomID) {
-    getGameBoardFiles(roomID);
-    setTimeout(() => {
-        console.log("game and board files have been loaded");
-        drawDisc(previousPlayer, id, row); // need latest move to send with data.json to draw latest disc each turn.
-        if (gameOver === true || gameOver === "true") {
-            console.log("game is over, checking how");
-            checkForDraw();
-            console.log("have checked for a draw");
-            console.log("2 the winner is " + winner);
-            checkForWinner(winner);
-            console.log("have checked for a win");
+/*function loadMove(roomID) {
+    const loadPromise = new Promise((resolve, reject) => {
+        //let timer = setInterval(resolve, 500);
+        resolve(getGameBoardFiles(roomID)) {
+            if (newMove === "yes") {
+                clearInterval(timer);
+                return;
+            } else {
+            }
         }
-        playersTurn = true;
-        console.log("it is now your turn to play");
-        return;
-    }, 1000);
-    
+    });*/
+        /*loadPromise.then((resolve) => {
+            drawDisc(previousPlayer, id, row); // need latest move to send with data.json to draw latest disc each turn.
+            checkForGameover();
+        });
+        //console.log("game and board files have been loaded");
+        loadPromise.catch(loadMoveErrors);
+}   */
+
+function checkForGameover() {
+    if (gameOver === true || gameOver === "true") {
+        console.log("game is over, checking how");
+        console.log("2 the winner is " + winner);
+        checkForWinner(winner);
+        console.log("have checked for a win");
+        checkForDraw();
+        console.log("have checked for a draw");
+    }
+    playersTurn = true;
+    console.log("it is now your turn to play");
+    return;
+}
+
+function loadMoveErrors(e) {
+    console.log(e);
 }
 
 
 function getGameBoardFiles(roomID) {
     var gameFile = gameFileAddr + roomID + "-Data.json";
     var boardFile = gameFileAddr + roomID + "-Board.json";
+    let newMove;
 
+    $.getJSON(boardFile, function(response, status) {
+        board = response.board;
+        console.log("status of getting boardFile: " + status)
+    })
     $.getJSON(gameFile, function(response, status) {
         currentPlayer = response.currentPlayer;
         previousPlayer = response.previousPlayer;
@@ -153,13 +176,13 @@ function getGameBoardFiles(roomID) {
         row = response.row;
         winner = response.winner;
         reset = response.reset;
-    });
-    
-
-    $.getJSON(boardFile, function(response, status) {
-        board = response.board;
-        console.log("status of getting boardFile: " + status)
-    });    
+        newMove = response.newMove;
+        console.log("status of getting gameFile: " + status)
+    }).then(() => {
+        drawDisc(previousPlayer, id, row); // need latest move to send with data.json to draw latest disc each turn.
+        checkForGameover();
+        return;
+    }).catch((e) => {console.log(e)});
 }
 
 // checks if previous player just won
@@ -238,7 +261,7 @@ function drawDisc(player, id, row) {
     let discRow = Number(row);
     var droppedDisc = "#" + discID;
     let height = -row * parseInt($(".cell").css("height")) + "px";
-    let seconds = row * (2/6) + "s";
+    let seconds = row * (1.5/6) + "s";
     $("body").css({
         "--t": height,
         "--s": seconds}
@@ -249,7 +272,7 @@ function drawDisc(player, id, row) {
     setTimeout(() => {
         $(".dropped").toggleClass("dropped");
     }, 3000);
-    console.log("disc animated");
+    console.log("disc animated " + id);
 }
 
 function checkForWin(direction, id, currentPlayer) {
@@ -279,6 +302,8 @@ function checkForDraw() {
     cells = board.filter(x => x.filled === "");
     if (cells.length === 0) {
         console.log("draw"); // need banner
+        $("#draw").addClass("visible");
+        gameOver = true;
         return;
     }  return;
 }

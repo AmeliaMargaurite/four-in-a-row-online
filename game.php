@@ -63,6 +63,7 @@ session_start();
           
           <div class="banner draw" id="draw">
             <h3>Draw!</h3>
+            <h3>Reset to start a new game</h3>
           </div>
         </div>
         <div class="arrows">
